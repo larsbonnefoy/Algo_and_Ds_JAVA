@@ -1,13 +1,13 @@
 package ft;
 
-import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Implements Generic ft.Vector Data Structure
  * //TODO Check java reflexion to avoid casting each time from Object to E
  * @param <E>
  */
-public class Vector<E> {
+public class Vector<E> implements Iterable<E> {
     private int capacity = 0;
     protected int capacityIncrement = 0;
     protected int elementCount = 0;
@@ -292,5 +292,39 @@ public class Vector<E> {
         Object tmp = elementData[pos1];
         elementData[pos1] = elementData[pos2];
         elementData[pos2] = tmp;
+    }
+    /***************************************IMPLEMENTATION OF ITERATOR INTERFACE********************************/
+    @Override
+    public Iterator<E> iterator() {
+        return new VectorIterator();
+    }
+
+    /**
+     * Implementation of Iterator Interface
+     */
+    private class VectorIterator implements Iterator<E> {
+        private int currentIndex = 0;
+
+        /**
+         * Checks if there is a next element left in the array
+         * @return true if an element remains, false if not
+         */
+        @Override
+        public boolean hasNext() {
+            return currentIndex < elementCount;
+        }
+
+        /**
+         * Returns next element in array
+         * Increment internal iterator value so that it points to the next element
+         * @return next element in array
+         */
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            return (E) elementData[currentIndex++];
+        }
     }
 }
