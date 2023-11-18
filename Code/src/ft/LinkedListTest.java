@@ -54,4 +54,27 @@ public class LinkedListTest {
             Assert.assertEquals((int)revIt.next(), i);
         }
     }
+
+    @Test
+    public void removeElement() {
+        int prevSize = list.size();
+        list.removeFirst();
+        Assert.assertEquals(1, (int)list.getFirst());
+        Assert.assertEquals(prevSize - 1, list.size());
+        prevSize = list.size();
+        list.remove(5); //removed value 5 from list
+        Assert.assertEquals(prevSize - 1, list.size());
+        for (Integer integer : list) {
+            Assert.assertNotSame(integer, 5);
+        }
+        Iterator<Integer> revit = list.descendingIterator();
+        while (revit.hasNext()) {
+            Assert.assertNotSame(revit.next(), 5);
+        }
+        prevSize = list.size();
+        list.removeLast();
+        Assert.assertEquals(prevSize - 1, list.size());
+        Assert.assertEquals(8, (int)list.getLast());
+    }
+
 }

@@ -117,19 +117,7 @@ public class LinkedList<E> implements Iterable<E> {
         }
         //Adding in the middle
         else {
-            ListElement d = null;
-            if (index <= size() / 2) {
-                d = head;
-                for (int i = index; i > 0 ; i--) {
-                    d = d.nextElement;
-                }
-            }
-            else {
-                d = tail;
-                for (int i = size() - index; i > 0 ; i--) {
-                    d = d.prevElement;
-                }
-            }
+            ListElement d = getListElement(index);
             new ListElement(element, d, d.nextElement);
         }
         count++;
@@ -149,6 +137,54 @@ public class LinkedList<E> implements Iterable<E> {
      */
     public void addLast(E element) {
         add(size(), element);
+    }
+
+    /**
+     * Removes element at given index
+     * @param index - index to remove parameter
+     * @return element that has been removed
+     * @throws IndexOutOfBoundsException if index < 0 || index >size
+     */
+    public E remove(int index) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        E val;
+        //Remove First element
+        if (index == 0) {
+            val = head.data;
+            head = head.nextElement;
+        }
+        //Remove Last element
+        else if (index == size() - 1) {
+            val = tail.value();
+            tail = tail.prevElement;
+        }
+        //Remove element in the middle
+        else {
+            ListElement d = getListElement(index);
+            val =  d.data;
+            d.prevElement.nextElement = d.nextElement;
+            d.nextElement.prevElement = d.prevElement;
+        }
+        count--;
+        return val;
+    }
+
+    /**
+     * Removes First element and returns it
+     * @return First element
+     */
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    /**
+     * Removes Last element and returns it
+     * @return Last element
+     */
+    public E removeLast() {
+        return remove(size() - 1);
     }
 
     @Override
@@ -226,5 +262,27 @@ public class LinkedList<E> implements Iterable<E> {
             return val;
         }
     }
-
+    /**************************************PRIVATE HELPER FUNCTIONS**************************************************/
+    /**
+     * Returns List Element at given index. Starts from the front if index < size / 2 or at the back if index >= size / 2
+     * Does NOT throw an error if index is out ouf bounds!!
+     * @param index - Index at which to get element
+     * @return ListElement at that position Index
+     */
+    private ListElement getListElement(int index) {
+        ListElement d = null;
+        if (index <= size() / 2) {
+            d = head;
+            for (int i = index; i > 0 ; i--) {
+                d = d.nextElement;
+            }
+        }
+        else {
+            d = tail;
+            for (int i = size() - index; i > 0 ; i--) {
+                d = d.prevElement;
+            }
+        }
+        return d;
+    }
 }
