@@ -58,11 +58,13 @@ public class LinkedListTest {
     @Test
     public void removeElement() {
         int prevSize = list.size();
-        list.removeFirst();
+        int removedVal = list.removeFirst();
+        Assert.assertEquals(0, removedVal);
         Assert.assertEquals(1, (int)list.getFirst());
         Assert.assertEquals(prevSize - 1, list.size());
         prevSize = list.size();
-        list.remove(5); //removed value 5 from list
+        removedVal = list.remove(5); //removed value 5 from list
+        Assert.assertEquals(5, removedVal);
         Assert.assertEquals(prevSize - 1, list.size());
         for (Integer integer : list) {
             Assert.assertNotSame(integer, 5);
@@ -72,9 +74,27 @@ public class LinkedListTest {
             Assert.assertNotSame(revit.next(), 5);
         }
         prevSize = list.size();
-        list.removeLast();
+        removedVal = list.removeLast();
+        Assert.assertEquals(9, removedVal);
         Assert.assertEquals(prevSize - 1, list.size());
         Assert.assertEquals(8, (int)list.getLast());
+
+        //Testing on Size 1 lists
+        LinkedList<Integer> list1 = new LinkedList<>();
+        list1.addFirst(1);
+        int elem = list1.removeFirst();
+        Assert.assertEquals(1, elem);
+        Assert.assertEquals(0, list1.size());
+
+        list1.addFirst(1);
+        elem = list1.removeLast();
+        Assert.assertEquals(1, elem);
+        Assert.assertEquals(0, list1.size());
+
+        list1.addFirst(1);
+        elem = list1.remove(0);
+        Assert.assertEquals(1, elem);
+        Assert.assertEquals(0, list1.size());
     }
 
 }

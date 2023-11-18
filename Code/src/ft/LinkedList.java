@@ -176,7 +176,7 @@ public class LinkedList<E> implements Iterable<E> {
      * @return First element
      */
     public E removeFirst() {
-        return remove(0);
+        return (remove(0));
     }
 
     /**
