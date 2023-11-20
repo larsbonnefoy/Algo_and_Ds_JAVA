@@ -1,3 +1,8 @@
+/**
+ * @author : larsbonnefoy
+ * @mailto : lars.bonnefoy@vub.be
+ * @created : 20/11/2023, lundi
+ **/
 package ft;
 import org.junit.Assert;
 import org.junit.Test;
@@ -5,6 +10,7 @@ public class StackTest {
 
     @Test
     public void generalTest(){
+
         Stack<Integer> stack = new Stack<>();
         Assert.assertTrue(stack.empty());
         stack.push(1);

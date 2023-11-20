@@ -1,3 +1,8 @@
+/**
+ * @author : larsbonnefoy
+ * @mailto : lars.bonnefoy@vub.be
+ * @created : 20/11/2023, lundi
+ **/
 package ft;
 
 import java.util.EmptyStackException;
