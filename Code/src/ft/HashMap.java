@@ -147,7 +147,6 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public V remove(Object key) {
-        resize();
         return null;
     }
 
@@ -178,7 +177,6 @@ public class HashMap<K, V> implements Map<K, V> {
      * we might have clustering issues
      */
     private void resize() {
-        System.out.println("CALLING RESIZE");
         int oldCapa = capacity;
         Node<K,V>[] oldMap = map;
         this.capacity = capacity << 1;
@@ -191,15 +189,18 @@ public class HashMap<K, V> implements Map<K, V> {
                 while (current != null) {
                     int index = hash(current.getKey());
                     //there are already elements at that index, append at the front
+                    Node<K,V> tmpNext = current.next; ///Need to save access to next node
                     if (map[index] != null) {
                         current.next = map[index];
                     }
-                    //First element to insert a that index
+                    //First element to insert at that index
                     else {
                         current.next = null;
                     }
+                    //Insert element in new map
                     map[index] = current;
-                    current = current.next;
+                    //restore access to next node (is equivalent to current.next before current inserted in the new list)
+                    current = tmpNext;
                 }
             }
         }

@@ -44,6 +44,7 @@ public class HashMapTest {
             map.put(String.format("%d", i), i); //triggers resize at i == 12 && i == 24 as (12/16 && 24/32) >= 32
         }
         for (int i = 1; i < 25; i++) { //All inserted elements should still exist
+            System.out.println(i);
             Assert.assertEquals(i, (int)map.get(String.format("%d", i)));
         }
     }
