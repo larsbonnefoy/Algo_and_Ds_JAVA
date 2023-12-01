@@ -10,6 +10,7 @@ import java.util.Iterator;
 /**
  * Implements Generic ft.Vector Data Structure
  * //TODO Check java reflexion to avoid casting each time from Object to E
+ *
  * @param <E>
  */
 public class Vector<E> implements Iterable<E> {
@@ -28,6 +29,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Construct Vector with initialCapacitu and capacityincrement = 0;
+     *
      * @param initialCapacity - initial capacity
      */
     public Vector(int initialCapacity) {
@@ -37,7 +39,8 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Construct Vector with initalCapacity and capacity increment
-     * @param initialCapacity - initial capacity
+     *
+     * @param initialCapacity   - initial capacity
      * @param capacityIncrement - value by which to increment capacity in case of reallocation
      */
     public Vector(int initialCapacity, int capacityIncrement) {
@@ -48,6 +51,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Adds element E at the end of the vector;
+     *
      * @param e - param to add
      * @return true
      */
@@ -59,9 +63,11 @@ public class Vector<E> implements Iterable<E> {
 
     //not really effective as data is copied once when moved and a second time when element is added in front, not an issues
     //because allocating memory is just 2n -> n for first copy and n for shift
+
     /**
      * Adds element at specific index, shifts every element currently at that position and all subsequents one to the right
-     * @param index - index at which to add
+     *
+     * @param index   - index at which to add
      * @param element - element to add
      */
     public void add(int index, E element) {
@@ -82,6 +88,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Returns true if object is in vector (is also supposed to work with o == null
+     *
      * @param o - element to search for
      * @return true if vector contains object
      */
@@ -95,11 +102,13 @@ public class Vector<E> implements Iterable<E> {
     }
 
     //TODO: refactor newCapacity conditions, are a bit ugly
+
     /**
      * Increases capacity of this vector to be sure that it holds at least capacity specified by the argument.
      * If current size is not sufficient, we replace internal Data array with a new one. New array is equal to the size
      * of the older one plus capacityIncrement (unless capacity increment <= 0, then its doubled).
      * If this new capacity is smaller than minCapacity, min capacity is used
+     *
      * @param minCapacity - Capacity to ensure
      */
     public void ensureCapacity(int minCapacity) {
@@ -116,6 +125,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Returns first element
+     *
      * @return returns first element
      * @throws java.util.NoSuchElementException if vector is empty
      */
@@ -125,6 +135,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Returns last element (ie at index size - 1)
+     *
      * @return returns first element
      * @throws java.util.NoSuchElementException if vector is empty
      */
@@ -134,6 +145,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Returns elements at index index
+     *
      * @param index - Index at which to retrieve element
      * @return element
      * @throws ArrayIndexOutOfBoundsException if index is out of range (index < 0 || index >= size)
@@ -144,7 +156,8 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Replaces element at index by new element, returning element previously at that position
-     * @param index - index at which to replace
+     *
+     * @param index   - index at which to replace
      * @param element - new element
      * @return Element that was previously at that position
      */
@@ -157,6 +170,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Returns number of elements of the vector
+     *
      * @return number of elements of the vector
      */
     public int size() {
@@ -169,6 +183,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Removes element at index, shifts every subsequent element to the left
+     *
      * @param index - index to remove element from
      * @return removed element
      * @throws ArrayIndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
@@ -189,6 +204,7 @@ public class Vector<E> implements Iterable<E> {
         acc += "]";
         return (acc);
     }
+
     /***************************************NON-VECTOR FUNCTIONS******************************************************/
     public void addFirst(E o) {
         add(0, o);
@@ -209,7 +225,7 @@ public class Vector<E> implements Iterable<E> {
      * Reverses elements from vector in place
      */
     public void reverse() {
-        for (int i = 0; i < elementCount / 2 ; i++) {
+        for (int i = 0; i < elementCount / 2; i++) {
             swap(i, elementCount - i);
         }
 
@@ -219,11 +235,12 @@ public class Vector<E> implements Iterable<E> {
      * Repeats each value two times
      * Should call a new constructor to create new object
      * Time Complexity: O(n) : O(n) for allocating + O(n) for copying
+     *
      * @return new Repeated vector
      */
     public Vector<E> repeat() {
         Vector<E> repeatVector = new Vector<>(elementCount * 2);
-        for (int i = 0; i < elementCount ; i++) {
+        for (int i = 0; i < elementCount; i++) {
             repeatVector.add((E) elementData[i]);
             repeatVector.add((E) elementData[i]);
         }
@@ -233,13 +250,14 @@ public class Vector<E> implements Iterable<E> {
     /**
      * Interleaves this vector with v2;
      * Time Complexity: O(n) : O(n) for allocating + O(n) for copying
+     *
      * @param v2 - vector to interleave
      * @return new interleave vector
      */
     public Vector<E> interleave(Vector<E> v2) {
-        Vector<E> interleaveVector  = new Vector<>(this.size() + v2.size());
+        Vector<E> interleaveVector = new Vector<>(this.size() + v2.size());
         int commonInteraction = (this.size() > v2.size()) ? v2.size() : this.size();
-        for (int i = 0; i < commonInteraction ; i++) {
+        for (int i = 0; i < commonInteraction; i++) {
             interleaveVector.add((E) elementData[i]);
             interleaveVector.add(v2.get(i));
         }
@@ -256,8 +274,9 @@ public class Vector<E> implements Iterable<E> {
     /***************************************PRIVATE HELPER FUNCTION***************************************************/
     /**
      * Copies nb elements from array dest to array src
+     *
      * @param dest - Destination array
-     * @param src - Destination array
+     * @param src  - Destination array
      * @return
      */
     private void copyData(Object[] dest, Object[] src, int nb) {
@@ -269,6 +288,7 @@ public class Vector<E> implements Iterable<E> {
     /**
      * Shift every value at position index and subsequently by one to the right
      * Need to start copy from the right;
+     *
      * @param index - index at which shift is supposed to starts
      */
     private void shiftRight(int index) {
@@ -280,6 +300,7 @@ public class Vector<E> implements Iterable<E> {
     /**
      * Shift every value at position index and before by one to the left
      * Need to start copy from the left;
+     *
      * @param index - index at which shift starts
      */
     private void shiftLeft(int index) {
@@ -290,6 +311,7 @@ public class Vector<E> implements Iterable<E> {
 
     /**
      * Swaps objects at index pos1 and pos2
+     *
      * @param pos1 - first element to swap
      * @param pos2 - second element toj swap
      */
@@ -298,6 +320,7 @@ public class Vector<E> implements Iterable<E> {
         elementData[pos1] = elementData[pos2];
         elementData[pos2] = tmp;
     }
+
     /***************************************IMPLEMENTATION OF ITERATOR INTERFACE********************************/
     @Override
     public Iterator<E> iterator() {
@@ -312,6 +335,7 @@ public class Vector<E> implements Iterable<E> {
 
         /**
          * Checks if there is a next element left in the array
+         *
          * @return true if an element remains, false if not
          */
         @Override
@@ -322,6 +346,7 @@ public class Vector<E> implements Iterable<E> {
         /**
          * Returns next element in array
          * Increment internal iterator value so that it points to the next element
+         *
          * @return next element in array
          */
         @Override

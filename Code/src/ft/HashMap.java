@@ -6,6 +6,7 @@ package ft;
  * @created : 21/11/2023, mardi
  **/
 
+//TODO add remove function
 /**
  * Simplified version of HashMap
  * Uses linked list to handle Collisions
@@ -14,7 +15,6 @@ package ft;
  */
 public class HashMap<K, V> implements Map<K, V> {
     private class Node<K,V> {
-        private int hash;
         private final K key;
         private V value;
 
@@ -28,7 +28,6 @@ public class HashMap<K, V> implements Map<K, V> {
          * @param next - used to handle collisions through chaining
          */
         public Node(int hash, K key, V value, Node<K, V> next) {
-            this.hash = hash;
             this.key = key;
             this.value = value;
             this.next = next;
@@ -77,7 +76,6 @@ public class HashMap<K, V> implements Map<K, V> {
     public V put(K key, V value) {
         if ((float)(size + 1) / capacity >= loadFactor) {
             resize();
-            System.out.println(String.format("On key %s", key.toString()));
         }
         return (putVal(hash(key), key ,value, false));
     }
@@ -158,6 +156,26 @@ public class HashMap<K, V> implements Map<K, V> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+    /**************************************Tracking function**************************************************/
+
+    /**
+     * Computes the effectiveness of the hashing repartition
+     * Returns number between [0;1] of elements that don't have a collision
+     * => The higher, the better
+     */
+    public float collisionEffectiveness() {
+        int nbCollision = 0;
+        for (int i = 0; i < capacity; i++) {
+            if (map[i] != null) {
+                Node<K, V> current = map[i];
+                while (current.next != null) {
+                    nbCollision++;
+                    current = current.next;
+                }
+            }
+        }
+        return (((float)size - (float)nbCollision) / (float)size);
     }
 
     /**************************************Private Helper Functions******************************************/

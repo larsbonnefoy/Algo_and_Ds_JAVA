@@ -40,12 +40,13 @@ public class HashMapTest {
     @Test
     public void resize() {
         HashMap<String, Integer> map = new HashMap<>();
-        for (int i = 1; i < 25; i++) {
+        for (int i = 1; i < 26; i++) {
             map.put(String.format("%d", i), i); //triggers resize at i == 12 && i == 24 as (12/16 && 24/32) >= 32
         }
-        for (int i = 1; i < 25; i++) { //All inserted elements should still exist
-            System.out.println(i);
+        for (int i = 1; i < 26; i++) { //All inserted elements should still exist
             Assert.assertEquals(i, (int)map.get(String.format("%d", i)));
         }
+        Assert.assertEquals(25, (int)map.size());
+        Assert.assertEquals(1.0f, (float)map.collisionEffectiveness(), 0.0001);
     }
 }
