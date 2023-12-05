@@ -61,6 +61,18 @@ public class LinkedListTest {
         }
     }
 
+    /**
+     * Adds element in the middle, checks if references in nodes at the left and the right of inserted
+     * node still hold.
+     */
+    @Test
+    public void addMiddle() {
+        list.add(5, 10);
+        System.out.println(list);
+        Assert.assertEquals(4, (int) list.get(4));
+        Assert.assertEquals(5, (int) list.get(6));
+    }
+
     @Test
     public void removeElement() {
         int prevSize = list.size();
@@ -69,15 +81,15 @@ public class LinkedListTest {
         Assert.assertEquals(1, (int)list.getFirst());
         Assert.assertEquals(prevSize - 1, list.size());
         prevSize = list.size();
-        removedVal = list.remove(5); //removed value 5 from list
-        Assert.assertEquals(5, removedVal);
+        removedVal = list.remove(5); //removed value 6 from list
+        Assert.assertEquals(6, removedVal);
         Assert.assertEquals(prevSize - 1, list.size());
         for (Integer integer : list) {
-            Assert.assertNotSame(integer, 5);
+            Assert.assertNotSame(integer, 6);
         }
         Iterator<Integer> revit = list.descendingIterator();
         while (revit.hasNext()) {
-            Assert.assertNotSame(revit.next(), 5);
+            Assert.assertNotSame(revit.next(), 6);
         }
         prevSize = list.size();
         removedVal = list.removeLast();

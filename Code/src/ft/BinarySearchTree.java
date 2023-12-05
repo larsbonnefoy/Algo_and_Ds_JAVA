@@ -38,25 +38,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
             this.left = n.left;
             this.right = n.right;
         }
-        public V getValue() {
-            return value;
-        }
-
-        public K getKey() {
-            return key;
-        }
-
-        public TreeNode getP() {
-            return p;
-        }
-
-        public TreeNode getLeft() {
-            return left;
-        }
-
-        public TreeNode getRight() {
-            return right;
-        }
     }
 
     private TreeNode root = null;

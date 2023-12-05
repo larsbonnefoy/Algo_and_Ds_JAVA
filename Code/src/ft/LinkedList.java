@@ -10,7 +10,12 @@ import java.util.NoSuchElementException;
 
 public class LinkedList<E> implements Iterable<E> {
 
-    private class ListElement {
+    /**
+     * Represent a node of the linked list
+     * Needs to be protected as implementations that inherit from the linkedlist might want to access ListElement class
+     * (i e Sorted LinkedList)
+     */
+    protected class ListElement {
         private final E data;
         private ListElement nextElement;
         private ListElement prevElement;
@@ -56,9 +61,9 @@ public class LinkedList<E> implements Iterable<E> {
         }
     }
 
-    private int count;
-    private ListElement head;
-    private ListElement tail;
+    protected int count;
+    protected ListElement head;
+    protected ListElement tail;
 
     public LinkedList() {
         head = null;
@@ -123,7 +128,10 @@ public class LinkedList<E> implements Iterable<E> {
         //Adding in the middle
         else {
             ListElement d = getListElement(index);
-            new ListElement(element, d, d.nextElement);
+            //As getListElement returns item at index we want to insert, new inserted element
+            //takes as previous d's previous element and as next element it takes d.
+            //Effectively shifting the list to the right from that index to make room for new item at that position
+            new ListElement(element, d, d.prevElement);
         }
         count++;
     }
@@ -203,6 +211,18 @@ public class LinkedList<E> implements Iterable<E> {
         s += ")";
         return s;
     }
+
+    /**
+     * Retrieves element at given index
+     * @param index index where to find element
+     * @return value of element stored at that index
+     */
+    public E get(int index) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return (getListElement(index).value());
+    }
     /***************************************IMPLEMENTATION OF ITERATOR INTERFACE********************************/
 
     /**
@@ -271,6 +291,7 @@ public class LinkedList<E> implements Iterable<E> {
     /**
      * Returns List Element at given index. Starts from the front if index < size / 2 or at the back if index >= size / 2
      * Does NOT throw an error if index is out ouf bounds!!
+     * O(n) running time
      * @param index - Index at which to get element
      * @return ListElement at that position Index
      */
@@ -284,7 +305,7 @@ public class LinkedList<E> implements Iterable<E> {
         }
         else {
             d = tail;
-            for (int i = size() - index; i > 0 ; i--) {
+            for (int i = size() - index - 1; i > 0 ; i--) {
                 d = d.prevElement;
             }
         }
