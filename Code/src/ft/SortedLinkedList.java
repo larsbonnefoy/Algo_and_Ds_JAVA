@@ -4,8 +4,14 @@ package ft;
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
  * @created : 05/12/2023, mardi
+ *
+ * Implements a sorted linked list based on a linkedList.
  **/
 public class SortedLinkedList <E extends Comparable<E>> extends LinkedList<E> {
+
+    SortedLinkedList() {
+        super();
+    }
 
     /**
      * Adds Element at specific position in Linked List. Uses private function
@@ -30,16 +36,18 @@ public class SortedLinkedList <E extends Comparable<E>> extends LinkedList<E> {
         }
         //We need to insert in the middle of the Sorted LinkedList.
         else {
-            ListElement prevElement = getSortedListElement(element);
-            new ListElement(element);
-
+            ListElement nextElement = getSortedListElement(element);
+            //Sets new element before found element
+            new ListElement(element, nextElement, nextElement.previous());
+            //Only need to increment count in this instance, as other cases increment count in LinkList function
+            count++;
         }
-        count++;
 
     }
 
     /**
-     * Returns ListElement at position after where element has to be inserted.
+     * Returns ListElement at position right after element where new element has to be inserted.
+     * (smallest value that is bigger than element to be inserted)
      * @param element - Element to insert
      * @return ListElement at insert position
      *

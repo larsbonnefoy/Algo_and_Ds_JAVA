@@ -68,7 +68,6 @@ public class LinkedListTest {
     @Test
     public void addMiddle() {
         list.add(5, 10);
-        System.out.println(list);
         Assert.assertEquals(4, (int) list.get(4));
         Assert.assertEquals(5, (int) list.get(6));
     }

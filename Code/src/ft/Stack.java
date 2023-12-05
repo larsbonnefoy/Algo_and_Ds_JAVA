@@ -7,6 +7,13 @@ package ft;
 
 import java.util.EmptyStackException;
 
+/**
+ * Stack Implementation based on a Vector.
+ *
+ * @param <E> - Elements of which stack is composed
+ *
+ * //TODO: delete inheritance to hide vector function?
+ */
 public class Stack<E> extends Vector<E>{
 
     /**

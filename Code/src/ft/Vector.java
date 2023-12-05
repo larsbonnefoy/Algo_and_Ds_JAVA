@@ -9,12 +9,13 @@ import java.util.Iterator;
 
 /**
  * Implements Generic ft.Vector Data Structure
- * //TODO Check java reflexion to avoid casting each time from Object to E
  *
  * @param <E>
  */
 public class Vector<E> implements Iterable<E> {
-    private int capacity = 0;
+
+    private static int DEFAULT_CAPACITY = 10;
+    private int capacity = DEFAULT_CAPACITY;
     protected int capacityIncrement = 0;
     protected int elementCount = 0;
     protected Object[] elementData;
@@ -24,7 +25,7 @@ public class Vector<E> implements Iterable<E> {
      * Construct a ft.Vector with internal size 10 that starts at 0.
      */
     public Vector() {
-        elementData = new Object[10];
+        elementData = new Object[DEFAULT_CAPACITY];
     }
 
     /**
@@ -100,8 +101,6 @@ public class Vector<E> implements Iterable<E> {
         }
         return false;
     }
-
-    //TODO: refactor newCapacity conditions, are a bit ugly
 
     /**
      * Increases capacity of this vector to be sure that it holds at least capacity specified by the argument.
@@ -205,6 +204,13 @@ public class Vector<E> implements Iterable<E> {
         return (acc);
     }
 
+    /**
+     * Returns capacity of current vector (=> Max number of elements it can store before needing reallocation)
+     * @return capacity of vector
+     */
+    public int capacity() {
+        return capacity;
+    }
     /***************************************NON-VECTOR FUNCTIONS******************************************************/
     public void addFirst(E o) {
         add(0, o);
@@ -270,7 +276,6 @@ public class Vector<E> implements Iterable<E> {
         return interleaveVector;
     }
 
-    //TODO Write templated version
     /***************************************PRIVATE HELPER FUNCTION***************************************************/
     /**
      * Copies nb elements from array dest to array src
