@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
@@ -34,9 +32,9 @@ public class BinarySearchTreeTest {
     @Test
     public void find() {
         bst.add(-4, -3);
-        Assert.assertEquals(-3, (int)bst.find(-4));
+        Assert.assertEquals(-3, (int)bst.findValue(-4));
         bst.add(10, 9);
-        Assert.assertEquals(9, (int)bst.find(10));
+        Assert.assertEquals(9, (int)bst.findValue(10));
         bst.display();
     }
 

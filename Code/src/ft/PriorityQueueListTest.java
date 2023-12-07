@@ -32,8 +32,9 @@ public class PriorityQueueListTest {
         Collections.shuffle(randList);
 
         for (int i = 0; i < randList.size(); i++) {
-            char asciiChar = (char) (i + ASCII_LOWER_CASE_OFFSET);
-            list.push(asciiChar, i + ASCII_LOWER_CASE_OFFSET);
+            int v = randList.get(i);
+            char asciiChar = (char) (v + ASCII_LOWER_CASE_OFFSET);
+            list.push(asciiChar, v + ASCII_LOWER_CASE_OFFSET);
         }
     }
 

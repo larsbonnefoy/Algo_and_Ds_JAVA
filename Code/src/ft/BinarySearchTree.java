@@ -5,7 +5,7 @@ package ft;
  * @mailto : lars.bonnefoy@vub.be
  * @created : 01/12/2023, vendredi
  *
- * Binary Search Tree implementation
+ * Binary Search Tree implementation that stores a key and maps it to a value
  * K represents Key
  * V represents Value
  * from Cormen, T., Leiserson, C., Rivest, R., &; Stein, C. (2009). Introduction to algorithms. Mit Press.
@@ -15,7 +15,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     /**
      * Private internal class representing a TreeNode
      */
-    private class TreeNode {
+    protected class TreeNode {
         private final V value;
         private final K key;
         private TreeNode p = null;
@@ -25,6 +25,14 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         TreeNode(K key, V value) {
             this.value = value;
             this.key = key;
+        }
+
+        @Override
+        public String toString() {
+            return "(" +
+                    "v=" + value +
+                    ", k=" + key +
+                    ")";
         }
 
         /**
@@ -38,12 +46,26 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
             this.left = n.left;
             this.right = n.right;
         }
+
+        public TreeNode getLeft() {
+            return left;
+        }
+
+        public TreeNode getRight() {
+            return right;
+        }
+
+        public V getValue() {
+            return value;
+        }
     }
 
-    private TreeNode root = null;
+    protected TreeNode root = null;
+
+    protected int size = 0;
 
     /**
-     * Constructor could do nothing as values are getting insert in form of nodes step by step
+     * Constructor does nothing as values are getting insert in form of nodes step by step
      */
     BinarySearchTree() {}
 
@@ -55,6 +77,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     public void add(K key, V value) {
         TreeNode toInsert = new TreeNode(key, value);
         insert(toInsert);
+        size++;
     }
 
     /**
@@ -69,7 +92,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      * @param key - element to find
      * @return Value or null if key is not present
      */
-    public V find(K key) {
+    public V findValue(K key) {
         TreeNode ret = search(root, key);
         return (ret != null ? ret.value : null);
     }
@@ -85,6 +108,10 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
             deleteNode(toDelete);
         }
         return (toDelete != null ? toDelete.value : null);
+    }
+
+    public int size() {
+        return size;
     }
     /**********************************Private function manipulating the tree**********************************/
 
@@ -217,7 +244,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      * input node z. Maintains a trailing reference y as the parent of x.
      * Two references are going left or right down the tree depending on the comparison of z.key until x becomes NIL.
      * x is the nil value we will replace and y is its parent.
-     * Runs in 0(h)
+     * Runs in 0(h) (h being height of the tree ie number of nodes from the root to leaves)
      *
      * from Cormen, T., Leiserson, C., Rivest, R., &; Stein, C. (2009). Introduction to algorithms. Mit Press.
      */

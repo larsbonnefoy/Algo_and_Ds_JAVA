@@ -12,15 +12,26 @@ import java.util.EmptyStackException;
  *
  * @param <E> - Elements of which stack is composed
  *
- * //TODO: delete inheritance to hide vector function?
+ * Available methods
+ * Stack();
+ * push(E);
+ * pop(E);
+ * top(E);
+ * size(E);
+ * empty(E);
+ *
+ * //TODO remove Exception throwing
+ *
  */
-public class Stack<E> extends Vector<E>{
+public class Stack<E> {
+
+    private final Vector<E> stack;
 
     /**
      * Constructs empty Stack
      */
     public Stack() {
-        super();
+        stack = new Vector<>();
     }
 
     /**
@@ -28,7 +39,7 @@ public class Stack<E> extends Vector<E>{
      * @return true if empty, false if not
      */
     public boolean empty() {
-        return super.isEmpty();
+        return stack.isEmpty();
     }
 
     /**
@@ -36,27 +47,43 @@ public class Stack<E> extends Vector<E>{
      * @return top on stack element
      */
     public E peek() {
-        if (empty()) {
+        if (stack.isEmpty()) {
             throw new EmptyStackException();
         }
-        return super.lastElement();
+        return stack.lastElement();
     }
 
     /**
      * Adds an element on the top of the stack (= end of vector)
+     * O(1) except on reallocation
      * @param item - item to add
      * @return added item
      */
     public E push(E item) {
-        super.addElement(item);
+        stack.addElement(item);
         return item;
     }
 
     /**
      * Removes top on stack element and returns it
+     * O(1)
      * @return top on stack element
      */
     public E pop() {
-        return (super.remove(super.size() - 1));
+        return (stack.remove(stack.size() - 1));
+    }
+
+    /**
+     * Returns top on stack element
+     * Wrapper function around peek.
+     * O(1)
+     * @return TOS element
+     */
+    public E top() {
+        return (peek());
+    }
+
+    public int size() {
+        return (stack.size());
     }
 }
