@@ -17,6 +17,7 @@ public class RedBlackTreeTest {
      * Runs multiple loops.
      * Start with 2^4 values up to 2^20 values.
      * Fills the tree with those values and checks if the height does not get bigger than 2log(n) + 1
+     * Checks with get method if values can be found back
      */
     @Test
     public void put() {
@@ -30,6 +31,13 @@ public class RedBlackTreeTest {
             double res = Math.log(maxVal)/Math.log(2);
             int maxHeight = (int)(2 * res) + 1;
             Assert.assertTrue(rbt.height() <= maxHeight);
+            Assert.assertEquals(rbt.size(), maxVal);
+            for (int j = 0; j < maxVal; j++) {
+                Assert.assertEquals(String.format("%d", j + 1),rbt.get(j));
+            }
+            //for (int j = 0; j < maxVal/2; j++) {
+            //    Assert.assertEquals(String.format("%d", j + 1), rbt.remove(j));
+            //}
         }
     }
 
@@ -47,6 +55,9 @@ public class RedBlackTreeTest {
         rbt.put(5, 5);
         //With a normal binary tree height of previous insert would have been 6.
         Assert.assertEquals(4, rbt.height());
+        Assert.assertEquals(8, (int)rbt.remove(8));
+        Assert.assertEquals(12, (int)rbt.remove(12));
+        Assert.assertEquals(19, (int)rbt.remove(19));
+        //Assert.assertEquals(19, (int)rbt.remove(19));
     }
-
 }

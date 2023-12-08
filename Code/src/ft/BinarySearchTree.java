@@ -136,7 +136,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      * from Cormen, T., Leiserson, C., Rivest, R., &; Stein, C. (2009). Introduction to algorithms. Mit Press.
      */
     private TreeNode search(TreeNode x, K k) {
-        while (x != null && k != x.key) {
+        while (x != null && k.compareTo(x.key) != 0) {
             //Go down the tree until we find the x with the right key
             if (k.compareTo(x.key) < 0) {
                 x = x.left;
@@ -275,6 +275,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
     /**
      * Replaces u by v in the three so that v has u's parent and u's parent has v as the child
+     * Allows v to be null
+     *
      * @param u - node that is being replaced
      * @param v - node that takes u's place
      *
@@ -291,6 +293,9 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         }
         else {                                      //u was right child
             u.p.right = v;
+        }
+        if (v != null) {
+            v.p = u.p;
         }
     }
 
