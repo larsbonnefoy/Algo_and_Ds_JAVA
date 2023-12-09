@@ -18,6 +18,8 @@ public class RedBlackTreeTest {
      * Start with 2^4 values up to 2^20 values.
      * Fills the tree with those values and checks if the height does not get bigger than 2log(n) + 1
      * Checks with get method if values can be found back
+     * Then deletes each value one by one, checks if returns value is correct.
+     * Checks if finding this deleted value returns correctly null
      */
     @Test
     public void put() {
@@ -35,7 +37,7 @@ public class RedBlackTreeTest {
             for (int j = 0; j < maxVal; j++) {
                 Assert.assertEquals(String.format("%d", j + 1),rbt.get(j));
             }
-            for (int j = 0; j < maxVal - 2; j++) {
+            for (int j = 0; j < maxVal; j++) {
                 Assert.assertEquals(String.format("%d", j + 1), rbt.remove(j));
                 Assert.assertEquals(maxVal - 1 - j, rbt.size());
                 Assert.assertNull(rbt.get(j));
@@ -45,6 +47,7 @@ public class RedBlackTreeTest {
 
     //Adds values 41, 38, 31, 12, 19, 8 into the three.
     //Same as exercise 13.3-2 at page 346 from ref book
+    //then proceeds to delete those values
     @Test
     public void ex3_2() {
         RedBlackTree<Integer, Integer> rbt = new RedBlackTree<>();

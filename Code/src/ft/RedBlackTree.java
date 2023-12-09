@@ -419,7 +419,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
      */
     private void rbtTransplant(TreeNode u, TreeNode v) {
         if (u.parent == NIL) {
-            root = u;
+            root = v;
         }
         else if (u == u.parent.left) {
             u.parent.left = v;
