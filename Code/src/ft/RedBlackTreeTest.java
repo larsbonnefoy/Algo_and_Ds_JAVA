@@ -3,6 +3,9 @@ package ft;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 
 /**
@@ -14,33 +17,46 @@ public class RedBlackTreeTest {
 
 
     /**
-     * Runs multiple loops.
-     * Start with 2^4 values up to 2^20 values.
-     * Fills the tree with those values and checks if the height does not get bigger than 2log(n) + 1
+     * Runs multiple loops, make a tree size between 2^4 and 2^20
+     * Fills the tree with ascending values and checks if the height does not get bigger than 2log(n) + 1
      * Checks with get method if values can be found back
-     * Then deletes each value one by one, checks if returns value is correct.
-     * Checks if finding this deleted value returns correctly null
+     * Then Creates a random list of elements and proceeds to delete values depending on this random list
+     * Checks if returns value is correct.
+     * Checks if searching for this deleted value returns correctly null
      */
     @Test
     public void put() {
         //from 2^4 to 2^20
         for (int i = 4; i < 20; i++) {
-            RedBlackTree<Integer, String> rbt = new RedBlackTree<>();
+            ArrayList<Integer> randList = new ArrayList<>();
             int maxVal = 1 << i;
+            //creating random list
+            for (int j = 0; j < maxVal; j++) {
+                randList.add(j);
+            }
+            Collections.shuffle(randList);
+
+            RedBlackTree<Integer, String> rbt = new RedBlackTree<>();
+            //add ascending elements to the tree
             for (int j = 0; j < maxVal; j++) {
                 rbt.put(j, String.format("%d", j + 1));
             }
+            //Check height and size of tree
             double res = Math.log(maxVal)/Math.log(2);
             int maxHeight = (int)(2 * res) + 1;
             Assert.assertTrue(rbt.height() <= maxHeight);
             Assert.assertEquals(rbt.size(), maxVal);
+            //Checks if we can retrieve all elements from the tree
             for (int j = 0; j < maxVal; j++) {
                 Assert.assertEquals(String.format("%d", j + 1),rbt.get(j));
             }
-            for (int j = 0; j < maxVal; j++) {
-                Assert.assertEquals(String.format("%d", j + 1), rbt.remove(j));
+            //Checks if we can delete all elements from the tree deletes them in random order, not in insertion order
+            //once element delete, try to access it again and check if element is null
+            for (int j = 0; j < randList.size(); j++) {
+                int elem = randList.get(j);
+                Assert.assertEquals(String.format("%d", elem + 1), rbt.remove(elem));
                 Assert.assertEquals(maxVal - 1 - j, rbt.size());
-                Assert.assertNull(rbt.get(j));
+                Assert.assertNull(rbt.get(elem));
             }
         }
     }
