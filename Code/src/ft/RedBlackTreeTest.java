@@ -35,9 +35,11 @@ public class RedBlackTreeTest {
             for (int j = 0; j < maxVal; j++) {
                 Assert.assertEquals(String.format("%d", j + 1),rbt.get(j));
             }
-            //for (int j = 0; j < maxVal/2; j++) {
-            //    Assert.assertEquals(String.format("%d", j + 1), rbt.remove(j));
-            //}
+            for (int j = 0; j < maxVal - 2; j++) {
+                Assert.assertEquals(String.format("%d", j + 1), rbt.remove(j));
+                Assert.assertEquals(maxVal - 1 - j, rbt.size());
+                Assert.assertNull(rbt.get(j));
+            }
         }
     }
 
@@ -56,8 +58,17 @@ public class RedBlackTreeTest {
         //With a normal binary tree height of previous insert would have been 6.
         Assert.assertEquals(4, rbt.height());
         Assert.assertEquals(8, (int)rbt.remove(8));
+        Assert.assertNull(rbt.get(8));
         Assert.assertEquals(12, (int)rbt.remove(12));
+        Assert.assertNull(rbt.get(12));
         Assert.assertEquals(19, (int)rbt.remove(19));
+        Assert.assertNull(rbt.get(19));
+        Assert.assertEquals(31, (int)rbt.remove(31));
+        Assert.assertNull(rbt.get(31));
+        Assert.assertEquals(38, (int)rbt.remove(38));
+        Assert.assertNull(rbt.get(38));
+        Assert.assertEquals(41, (int)rbt.remove(41));
+        Assert.assertNull(rbt.get(41));
         //Assert.assertEquals(19, (int)rbt.remove(19));
     }
 }

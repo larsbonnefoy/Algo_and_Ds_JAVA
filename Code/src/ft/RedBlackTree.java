@@ -490,7 +490,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             y = minimum(z.right);                   //y is z's successor
             yOriginalColor = y.color;
             x = y.right;                            //x is y's child. x will take y's previous position in the tree
-            if (y != z.right) {                     //y is not directly z's
+            if (y != z.right) {                     //y is not directly z's right child
                 rbtTransplant(y, y.right);          //replace y by its right child x
                 y.right = z.right;                  //z's previous right child becomes y's right child
                 y.right.parent = y;                 //set relation in other way
@@ -613,7 +613,7 @@ public class RedBlackTree<K extends Comparable<K>, V> {
                     x = root;                           //stop the loop
                 }
             }
-            x.color = Color.BLACK;
         }
+        x.color = Color.BLACK;
     }
 }
