@@ -3,6 +3,14 @@ package ft;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * SingleLinkedList.java
+ * @author : larsbonnefoy
+ * @mailto : lars.bonnefoy@vub.be
+ * @created : 20/11/2023, lundi
+ *
+ * Implements Generic Singly Linked List Data Structure
+ */
 public class SingleLinkedList<E> {
 
     private class ListElement {

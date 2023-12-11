@@ -8,6 +8,8 @@ import org.junit.Test;
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
  * @created : 05/12/2023, mardi
+ *
+ * Test Cases for Circular Vector
  **/
 public class CircularVectorTest {
 

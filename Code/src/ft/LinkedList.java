@@ -8,6 +8,15 @@ package ft;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * LinkedList.java
+ * @author : larsbonnefoy
+ * @mailto : lars.bonnefoy@vub.be
+ * @created : 21/11/2023, mardi
+ *
+ * Doubly linked list implementation.
+ *
+ **/
 public class LinkedList<E> implements Iterable<E> {
 
     /**
@@ -99,7 +108,7 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     public boolean add(E element) {
-        addLast(element);
+        AddLast(element);
         return true;
     }
 
@@ -139,16 +148,18 @@ public class LinkedList<E> implements Iterable<E> {
     /**
      * Inserts element at the beginning of the list
      * @param element to insert
+     * /!\ UpperCamelCase is needed to be implemented as in the provided template
      */
-    public void addFirst(E element) {
+    public void AddFirst(E element) {
         add(0, element);
     }
 
     /**
      * Inserts element at the end of the list
      * @param element to insert
+     * /!\ UpperCamelCase is needed to be implemented as in the provided template
      */
-    public void addLast(E element) {
+    public void AddLast(E element) {
         add(size(), element);
     }
 

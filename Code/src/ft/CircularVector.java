@@ -9,7 +9,7 @@ package ft;
  * Need to keep track of number of elements in vector as well as where the vector starts
  *
  * As we are using vector.set to set values in the circularVector, vector is never going to be able to grow beyond
- * its inital amount of data.
+ * its initial amount of data.
  *
  **/
 public class CircularVector<E> {

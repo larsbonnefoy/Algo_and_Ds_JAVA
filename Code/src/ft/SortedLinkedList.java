@@ -28,11 +28,11 @@ public class SortedLinkedList <E extends Comparable<E>> extends LinkedList<E> {
         }
         //Head element is bigger than element we try to insert, we want to insert in front
         else if (head.value().compareTo(element) > 0) {
-            addFirst(element);
+            AddFirst(element);
         }
         //Tail element is smaller than element we try to insert, we want to insert in back
         else if (tail.value().compareTo(element) < 0) {
-            addLast(element);
+            AddLast(element);
         }
         //We need to insert in the middle of the Sorted LinkedList.
         else {

@@ -1,12 +1,12 @@
 package ft;
 
 /**
+ * HashMap.java
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
  * @created : 21/11/2023, mardi
  **/
 
-//TODO add remove function
 /**
  * Simplified version of HashMap
  * Uses linked list to handle Collisions

@@ -7,9 +7,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * DictionaryVectorTest.java
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
  * @created : 05/12/2023, mardi
+ *
+ * Tests cases for Dictionary Vector
  **/
 public class DictionaryVectorTest {
 

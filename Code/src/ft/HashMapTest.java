@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
  * @created : 21/11/2023, mardi
+ *
+ * Test cases for HashMap
  **/
 public class HashMapTest {
 

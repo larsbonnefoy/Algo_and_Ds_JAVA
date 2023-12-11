@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import java.util.Iterator;
 
+/**
+ * Tests for the LinkedList
+ */
 public class LinkedListTest {
     LinkedList<Integer> list =  new LinkedList<>();
     LinkedList<Integer> secondList =  new LinkedList<>();
@@ -40,9 +43,9 @@ public class LinkedListTest {
 
     @Test
     public void frontAndBack() {
-       list.addFirst(-1);
+       list.AddFirst(-1);
        Assert.assertEquals(-1, (int)list.getFirst());
-        list.addLast(-2);
+        list.AddLast(-2);
         Assert.assertEquals(-2, (int)list.getLast());
         Assert.assertEquals(12, list.size());
     }
@@ -98,17 +101,17 @@ public class LinkedListTest {
 
         //Testing on Size 1 lists
         LinkedList<Integer> list1 = new LinkedList<>();
-        list1.addFirst(1);
+        list1.AddFirst(1);
         int elem = list1.removeFirst();
         Assert.assertEquals(1, elem);
         Assert.assertEquals(0, list1.size());
 
-        list1.addFirst(1);
+        list1.AddFirst(1);
         elem = list1.removeLast();
         Assert.assertEquals(1, elem);
         Assert.assertEquals(0, list1.size());
 
-        list1.addFirst(1);
+        list1.AddFirst(1);
         elem = list1.remove(0);
         Assert.assertEquals(1, elem);
         Assert.assertEquals(0, list1.size());

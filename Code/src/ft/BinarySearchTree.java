@@ -1,6 +1,7 @@
 package ft;
 
 /**
+ * BinarySearchTree.java
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
  * @created : 01/12/2023, vendredi

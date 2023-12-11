@@ -1,16 +1,29 @@
-/**
- * @author : larsbonnefoy
- * @mailto : lars.bonnefoy@vub.be
- * @created : 20/11/2023, lundi
- **/
 package ft;
 
 import java.util.Iterator;
 
 /**
- * Implements Generic ft.Vector Data Structure
+ * @author : larsbonnefoy
+ * @mailto : lars.bonnefoy@vub.be
+ * @created : 20/11/2023, lundi
  *
- * @param <E>
+ * Implements Generic Vector Data Structure
+ * Function that are at least implemented
+ * E get(int);
+ * void set(int, E);
+ * void size(void);
+ * boolean isEmpty(void);
+ * boolean contains(E);
+ * E getFirst(void);
+ * E getLast(void);
+ * void addFirst(E);
+ * void addLast(E);
+ * void removeLast(void);
+ * void removeFirst(void);
+ * void reverse(void);
+ * Vector<E> repeat(void);
+ * Vector<E> interleave(Vector<E>);
+ *
  */
 public class Vector<E> implements Iterable<E> {
 
@@ -212,17 +225,52 @@ public class Vector<E> implements Iterable<E> {
         return capacity;
     }
     /***************************************NON-VECTOR FUNCTIONS******************************************************/
+
+    /**
+     * Returns first element of vector
+     * @return first element of vector
+     */
+    public E getFirst() {
+        return get(0);
+    }
+
+    /**
+     * Returns last element of vector
+     * @return last element of vector
+     */
+    public E getLast() {
+        return get(elementCount - 1);
+    }
+
+    /**
+     * Adds element in first position of vector
+     * O(n) as everything is shifted right to make place for this value
+     * @param o - element to add in first position
+     */
     public void addFirst(E o) {
         add(0, o);
+    }
+
+    /**
+     * Adds element in first position of vector
+     * O(n) as everything is shifted right to make place for this value
+     * @param o - element to add in first position
+     */
+    public void addLast(E o) {
+        add(elementCount, o);
     }
 
     /**
      * Removes last element
      */
     public void removeLast() {
-        remove(elementCount);
+        remove(elementCount - 1);
     }
 
+    /**
+     * Removes first element in vector
+     * O(n) as every data on the right has to be shifted left
+     */
     public void removeFirst() {
         remove(0);
     }

@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests for the SingleLinkedList
+ */
 public class SingleLinkedListTest {
     SingleLinkedList<Integer> list =  new SingleLinkedList<>();
 
