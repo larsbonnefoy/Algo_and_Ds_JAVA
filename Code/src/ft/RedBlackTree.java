@@ -1,5 +1,7 @@
 package ft;
 
+import java.util.Iterator;
+
 /**
  * @author : larsbonnefoy
  * @mailto : lars.bonnefoy@vub.be
@@ -19,7 +21,7 @@ package ft;
  *
  * from Cormen, T., Leiserson, C., Rivest, R., &; Stein, C. (2009). Introduction to algorithms. Mit Press.
  **/
-public class RedBlackTree<K extends Comparable<K>, V> {
+public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<V> {
 
     private enum Color {
         RED,
@@ -201,6 +203,34 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             inOrderTreeWalkString(x.right, res);
         }
     }
+
+    /**
+     * If x has a right child, successor is just the left most value of this right child
+     *
+     * If the right subtree of node x is empty and x has a successor y, then y is the lowest
+     * ancestor of x whose left child is also an ancestor of x.
+     *
+     * Else to find y, we go up the tree from x until we encounter either the root node
+     * or a node that is the left child of its parents
+     *
+     * @param x - node of which we want to find the successor
+     * @return TreeNode that is the successor of node x.
+     */
+    private TreeNode successor(TreeNode x) {
+        if (x.right != NIL) {
+            return minimum(x.right);
+        }
+        else {
+            TreeNode y = x.parent;
+            //TreeNode y = new TreeNode(x.parent);
+            while (y != NIL && x == y.right) {
+                x = y;
+                y = y.parent;
+            }
+            return y;
+        }
+    }
+
 
     /**
      * Finds depth of tree from root n
@@ -615,5 +645,32 @@ public class RedBlackTree<K extends Comparable<K>, V> {
             }
         }
         x.color = Color.BLACK;
+    }
+
+    /***************************************IMPLEMENTATION OF ITERATOR INTERFACE********************************/
+    @Override
+    public Iterator<V> iterator() {
+        return new RBTIterator();
+    }
+
+    private class RBTIterator implements Iterator<V> {
+        private TreeNode current = minimum(root);
+        private int visitedElements = 0;
+
+        @Override
+        public boolean hasNext() {
+            return visitedElements < size();
+        }
+
+        @Override
+        public V next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            visitedElements++;
+            V retValue = current.value;
+            current = successor(current);
+            return retValue;
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -89,5 +90,19 @@ public class RedBlackTreeTest {
         Assert.assertEquals(41, (int)rbt.remove(41));
         Assert.assertNull(rbt.get(41));
         //Assert.assertEquals(19, (int)rbt.remove(19));
+    }
+
+    @Test
+    public void iterator() {
+        RedBlackTree<Integer, Integer> rbt = new RedBlackTree<>();
+        for (int i = 0; i < 100; i++) {
+            rbt.put(i,i);
+        }
+        Iterator<Integer> it = rbt.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            Assert.assertEquals(i, (int)it.next());
+            i++;
+        }
     }
 }
